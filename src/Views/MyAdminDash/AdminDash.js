@@ -87,3 +87,54 @@ document.querySelectorAll('menulink a').forEach(link => {
     });
 });
 
+function acceptRequest() {
+    // Add logic to handle accepting the request
+    alert("Request accepted!");
+    // Redirect to pending requests list or refresh the page
+}
+
+function rejectRequest() {
+    // Add logic to handle rejecting the request
+    alert("Request rejected!");
+    // Redirect to pending requests list or refresh the page
+}
+
+document.getElementById('subjectIcon').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('previewImage');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// Form validation and submission
+document.getElementById('subjectForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Validate grades selection
+    const gradeCheckboxes = document.querySelectorAll('input[name="grades"]:checked');
+    const errorMessage = document.getElementById('gradeError');
+    
+    if (gradeCheckboxes.length === 0) {
+        errorMessage.style.display = 'block';
+        return;
+    }
+    errorMessage.style.display = 'none';
+    
+    // Collect form data
+    const formData = new FormData(this);
+    const subjectData = {
+        name: formData.get('subjectName'),
+        grades: Array.from(gradeCheckboxes).map(cb => cb.value),
+        icon: formData.get('subjectIcon')
+    };
+    
+    console.log('Subject Data:', subjectData);
+    // Add your API call here to submit the data
+});

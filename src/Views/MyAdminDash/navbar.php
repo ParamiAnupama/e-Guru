@@ -15,7 +15,5 @@
         <li><a href="/forum" class="<?php echo ($current_page == '/forum' ? 'active' : ''); ?>">Forum</a></li>
         <li><a href="/tutor-login" class="<?php echo ($current_page == '/tutor-login' ? 'active' : ''); ?>">Tutor Login</a></li>
         <li><a href="/student-login" class="<?php echo ($current_page == '/student-login' ? 'active' : ''); ?>">Student Login</a></li>
-        
-        <li><a href="/admin-login" class="<?php echo ($current_page == '/admin-login' ? 'active' : ''); ?>">Admin Login</a></li>
     </ul>
 </nav>
