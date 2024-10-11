@@ -5,6 +5,28 @@
     <link rel="stylesheet" type="text/css" href="AdminDash.css">
 </head>
 <body>
+
+<div class="clock-container">
+        <h1 id="time"></h1>
+    </div>
+
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById('time');
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Update the time every second
+        setInterval(updateTime, 1000);
+
+        // Call the function once initially to display the time immediately
+        updateTime();
+    </script>
+    
     <div id="mySidenav" class="sidenav" style="font-style: 'kalam';">
         <div class="menulink">
             <div class="image-icon">
@@ -45,7 +67,7 @@
             <div class="image-icon">
                 <img src="../Images/book.png" alt="Create Subject Icon">
             </div>
-            <a href="#create-subject">Create Subject</a>
+            <a href="#add-subject">Manage Subject</a>
         </div>
 
         <div class="menulink">
@@ -84,39 +106,41 @@
         </div>
         <div class="dates" id="dates"></div>
     </div>
+
     <script src="AdminDash.js"></script>    
 
-    <div class="main">
+    <div class="main">        
         <section>
-        <div class="container" id="dashboard"></div>
-            <div class="banner" >
-                <div class="text">
-                    <h2>Welcome back,</h2>
-                    <p>Keep up the good work!</p>
+            <div class="container" id="dashboard">
+                <div class="banner" >
+                    <div class="text">
+                        <h2>Welcome back,</h2>
+                        <p>Keep up the good work!</p>
+                    </div>
+                    <img src="./Images/admin.jpg" alt="People reading a book" class="image">
                 </div>
-                <img src="./Images/admin.jpg" alt="People reading a book" class="image">
-            </div>
 
-            <div class="overview">
-                <center>
-                    <h2>Overview</h2>
-                </center>
-                <div class="stats">
-                    <div class="stat">
-                        <h3>Total Users</h3>
-                        <p>150</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Total Tutors</h3>
-                        <p>30</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Total Students</h3>
-                        <p>45</p>
-                    </div>
-                    <div class="stat">
-                        <h3>Pending Requests</h3>
-                        <p>08</p>
+                <div class="overview">
+                    <center>
+                        <h2>Overview</h2>
+                    </center>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>Total Users</h3>
+                            <p>150</p>
+                        </div>
+                        <div class="stat">
+                            <h3>Total Tutors</h3>
+                            <p>30</p>
+                        </div>
+                        <div class="stat">
+                            <h3>Total Students</h3>
+                            <p>45</p>
+                        </div>
+                        <div class="stat">
+                            <h3>Pending Requests</h3>
+                            <p>08</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +159,7 @@
                         <p class="last-logged-in">Grade : </p>
                         <p class="last-logged-in">Requested fee increment :</p>
                     </div>
-                    <div class="menu-icon"> View  </div>
+                    <div class="menu-icon"><a href ="./FeeRequest.php">View</a></div>
                 </div>
                 <!-- Repeat user-card div for other tutors -->
             </div>
@@ -159,7 +183,7 @@
                         <p class="last-logged-in">Last Logged In: 25 July 2024 2:00 pm</p>
                         <p class="last-logged-in">Subjects :</p>
                     </div>
-                    <div class="menu-icon"> View  </div>
+                    <div class="menu-icon"><a href="./TeacherProfile.php"> View </a> </div>
                 </div>
                 <!-- Repeat user-card div for other tutors -->
             </div>
@@ -183,7 +207,7 @@
                         <p class="last-logged-in">Last Logged In: 25 July 2024 2:00 pm</p>
                         <p class="last-logged-in">Subjects :</p>
                     </div>
-                    <div class="menu-icon"> View  </div>
+                    <div class="menu-icon"><a href="./StudentProfile.php"> View </a></div>
                 </div>
                 <!-- Repeat user-card div for other students -->
             </div>
@@ -191,9 +215,11 @@
 
         <section id="add-subject">
             <div class="container">
-                
+                <center>
+                    <h2>Manage Subject</h2>
+                </center>
                 <form class="subject-form" id="subjectForm">
-                    <h2>Add New Subject</h2>
+                    
                     <div class = "container3">
                     <!-- Subject Name -->
                     <div class="form-group">
@@ -278,6 +304,26 @@
                 </form>
                 </div>
             </div>
+            <center>
+                <h2>Manage Subjects</h2>
+            </center>
+            <div class="container">
+                <div class="search-bar">
+                        <input type="text" placeholder="Search Subject" class="search-input">
+                        <button type="submit" class="search-button">Search</button>
+                </div>
+
+                <div class="subject-card">
+                        <img src="./Images/SV2.jpg" alt="Subject Image" class="subject-image">
+                        <div class="user-info">
+                            <p class="subject-name">Geography</p>
+                        </div>
+                        <div class="menu-icon"><a href="./Subject.php"> View </a></div>
+                </div>
+            </div>  
+                <!-- Repeat subject-card div for other subjects -->
+            
+
         </section>
 
         <section id="pending-requests">
@@ -285,60 +331,80 @@
                 <center>
                     <h2>Pending Requests</h2>
                 </center>
-                <div class="container2">
-                    
-                    <div class="user-card">
-                    <div class="request-info">
+               
+                <div class="user-card">
+                    <div class="pending-user-info">
                         <p><strong>Name:</strong> John Doe</p>
                         <p><strong>Email:</strong> john.doe@example.com</p>
                         <p><strong>Subjects:</strong> Mathematics, Physics</p>
                         <p><strong>Experience:</strong> 5 years</p>
                         <p><strong>Education:</strong> Ph.D. in Physics, University of Example</p>
-                        <p><strong>Certifications:</strong> Certified Mathematics Tutor</p>
-                        <p><strong>Availability:</strong> Weekdays 4PM-8PM, Weekends 10AM-4PM</p>
-                        <p><strong>Additional Information:</strong> Specializes in AP Physics and Calculus. Has experience tutoring both high school and college students.</p>
                     </div>
                     <div class="actions">
                         <button class="accept-button" onclick="acceptRequest()">Accept</button>
                         <button class="reject-button" onclick="rejectRequest()">Reject</button>
-                    </div>
+                        <button class="view-button"><a  href="./Pending.php"> View</a></button>
                     </div>
                 </div>
+                
             </div>
         </section>
 
         <section id="settings">
+            
+            <center>
+                <div class="settings-header">
+                    <h2>Admin Settings</h2>
+                    <p>Manage your application settings</p>
+                </div>
+            </center>
             <div class="container">
-                <center>
-                    <h2>Settings</h2>
-                </center>
-                <div class="settings-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="site-name">Site Name:</label>
-                            <input type="text" id="site-name" name="site-name" value="TutorHub">
-                        </div>
-                        <div class="form-group">
-                            <label for="admin-email">Admin Email:</label>
-                            <input type="email" id="admin-email" name="admin-email" value="admin@tutorhub.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="timezone">Timezone:</label>
-                            <select id="timezone" name="timezone">
-                                <option value="UTC-8">Pacific Time (PT)</option>
-                                <option value="UTC-5">Eastern Time (ET)</option>
-                                <option value="UTC+0">Coordinated Universal Time (UTC)</option>
-                                <option value="UTC+1">Central European Time (CET)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="maintenance-mode">Maintenance Mode:</label>
-                            <input type="checkbox" id="maintenance-mode" name="maintenance-mode">
-                        </div>
-                        <button type="submit" class="save-button">Save Changes</button>
-                    </form>
+            <div class="settings-container">
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Email Notifications</h3>
+                        <p>Receive email updates for important system events</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Two-Factor Authentication</h3>
+                        <p>Enhance security with 2FA verification</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>API Access</h3>
+                        <p>Allow external API connections</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Maintenance Mode</h3>
+                        <p>Temporarily disable public access</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
                 </div>
             </div>
+        </div>
         </section>
     </div>
     

@@ -138,3 +138,5 @@ document.getElementById('subjectForm').addEventListener('submit', function(e) {
     console.log('Subject Data:', subjectData);
     // Add your API call here to submit the data
 });
+
+
