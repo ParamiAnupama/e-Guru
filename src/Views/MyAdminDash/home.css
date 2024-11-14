@@ -1,0 +1,97 @@
+.main_title{
+    margin: 0;
+    padding-left: 10%;
+    font-size: 60px;
+    color: white;
+    font-family:sans-serif;
+}
+
+.sub_title_1{
+    padding-left: 10%;
+    padding-top: 1%;
+    padding-right: 15%;
+    font-size: 40px;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.sub_title_2{
+    padding-left: 10%;
+    padding-top: 1%;
+    padding-right: 0%;
+    font-size: 25px;
+    color: white;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container for the text and image */
+.content {
+    display: flex; /* Makes the container a flexbox */
+    justify-content: space-between; /* Places the text and image apart */
+    align-items: center; /* Vertically centers both the text and image */
+    
+}
+
+/* Text section */
+.content .text {
+    flex: 1; /* Allows the text to take up available space */
+}
+
+/* Image section */
+.content .image img {
+    padding-top: 3%;
+    max-width: 650px; /* Adjust the width of the image */
+    height: auto; /* Keeps the image proportional */
+}
+
+/* public/css/navbar.css */
+
+/* Container for the buttons */
+.button-container {
+    display: flex; /* Align elements in a row */
+    align-items: center; /* Vertically align items */
+    margin-top: 10px; /* Add some margin to the top */
+    padding-left: 15%;
+}
+
+/* Style for the buttons */
+.btn_tutor {
+    background-color: #4b479a; /* Green background */
+    color: white; /* White text */
+    padding: 12px 30px; /* Button padding */
+    border: none; /* Remove borders */
+    box-shadow: #00000052 4px 4px  ;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    margin: 0 10px; /* Margin to space buttons */
+}
+
+.btn_student {
+    background-color: #ffffff; /* Green background */
+    color: #c72f6c; /* White text */
+    padding: 12px 20px; /* Button padding */
+    border: none; /* Remove borders */
+    box-shadow: #00000052 4px 4px  ;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    margin: 0 10px; /* Margin to space buttons */
+}
+
+/* Change background color on hover */
+.btn_tutor:hover {
+    text-decoration: underline white;
+}
+
+.btn_student:hover {
+    text-decoration: underline #c72f6c;
+}
+
+/* Style for the OR text */
+.or-text {
+    margin: 0 40px; /* Space between the OR and buttons */
+    font-weight: bold; /* Bold text */
+    font-size: 16px; /* Adjust font size */
+    color: #ffffff; /* Text color */
+}
