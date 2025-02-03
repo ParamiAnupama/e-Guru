@@ -8,8 +8,11 @@ class Router
 
     private function addRoute($route, $controller, $action, $method)
     {
-
-        $this->routes[$method][$route] = ['controller' => $controller, 'action' => $action];
+        $this->routes[$method][] = [
+            'route' => $route,
+            'controller' => $controller, 
+            'action' => $action
+        ];
     }
 
     public function get($route, $controller, $action)
@@ -24,9 +27,10 @@ class Router
 
     public function dispatch()
     {
-        $uri = strtok($_SERVER['REQUEST_URI'], '?');
-        $method =  $_SERVER['REQUEST_METHOD'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $method = $_SERVER['REQUEST_METHOD'];
 
+<<<<<<< Updated upstream
         if (array_key_exists($uri, $this->routes[$method])) {
             $controller = $this->routes[$method][$uri]['controller'];
             $action = $this->routes[$method][$uri]['action'];
@@ -35,6 +39,34 @@ class Router
             $controller->$action();
         } else {
             throw new \Exception("No route found for URI: $uri");
+=======
+        foreach ($this->routes[$method] as $route) {
+            // Convert dynamic routes to regex
+            $pattern = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '([^/]+)', $route['route']);
+            $pattern = '#^' . str_replace('/', '\\/', $pattern) . '$#';
+
+            if (preg_match($pattern, $uri, $matches)) {
+                // Remove the full match
+                array_shift($matches);
+
+                // Instantiate the controller
+                $controller = new $route['controller']();
+                
+                // Call the method with matched parameters
+                call_user_func_array(
+                    [$controller, $route['action']], 
+                    $matches
+                );
+                return;
+            }
+>>>>>>> Stashed changes
         }
+
+        throw new \Exception("No route found for URI: $uri");
+    }
+
+    public static function redirect($url) {
+        header("Location: $url");
+        exit();
     }
 }

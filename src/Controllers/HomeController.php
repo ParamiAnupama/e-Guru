@@ -6,8 +6,7 @@ use App\Controller;
 use App\Models\Tutor;
 
 class HomeController extends Controller
-{
-    public function index()
+{    public function index()
     {
         $tutors = [
             new Tutor('James', '0001'),
