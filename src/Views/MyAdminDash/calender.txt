@@ -1,0 +1,191 @@
+CSS
+
+.calendar{
+    font-family: kalam;
+    position: fixed;
+    top: 12%;
+    right: 10px;
+    width:18%;
+    height : auto;
+    display:flex;
+    flex-direction: column;
+    padding: 10px;
+    background: var(--offwhite);
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    background-color: var(--offwhite);
+}
+
+.header{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.monthYear{
+    text-align: center;
+    font-weight: 600;
+    width:150px;
+}
+
+.header button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    background: lightblue;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    padding: 10px;
+    background: rgba(173, 216, 230,0.3);
+    border-radius: 10px;
+    color: #000000;
+}
+
+.day{
+    text-align: center;
+    padding: 2px;
+    color: #1a2fcc;
+    font-weight: 500;
+
+}
+
+.dates{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    
+    
+}
+
+.date{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align:center;
+    padding: 5px;
+    border-radius: 50%;
+    margin: auto;
+    cursor: pointer;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    transition: 0.2s;
+}
+
+.date:hover{
+    background: #ff5869;
+    color: white;
+}
+
+.date.active{
+    color: #d2d2d2;
+    background: #ff5869;
+}
+
+.date.inactive:hover{
+    color : #fff;
+}
+
+.date.blank{
+    color: var(--offwhite);
+}
+
+----------------------------------------------------------
+calender html and php
+
+<html>
+
+<div class="calendar">
+        <div class="header">
+            <button class="calendar-btn" id="prevBtn">
+                <
+            </button>
+            <div class="monthYear" id="monthYear"></div>
+            <button class="calendar-btn" id="nextBtn">
+                >
+            </button>
+        </div>
+        <div class="days">
+            <div class="day">Sat</div>
+            <div class="day">Sun</div>
+            <div class="day">Mon</div>
+            <div class="day">Tue</div>
+            <div class="day">Wed</div>
+            <div class="day">Thu</div>
+            <div class="day">Fri</div>
+        </div>
+        <div class="dates" id="dates"></div>
+    </div>
+    <script src="AdminDash.js"></script>
+</html>
+     
+----------------------------------
+calender js
+
+// calendar.js
+const monthYearElement = document.getElementById('monthYear');
+const datesElement = document.getElementById('dates');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentDate = new Date();
+
+let selectedDate   
+ = null; // Store the selected date
+
+const updateCalendar = () => {
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+
+    const firstDay = new Date(currentYear, currentMonth, 1);
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const totalDays = lastDay.getDate();
+    const firstDayIndex = firstDay.getDay();
+    const lastDayIndex = lastDay.getDay();
+
+    const monthYearString = currentDate.toLocaleString(
+        'default',
+        { month: 'long', year: 'numeric' }
+    );
+    monthYearElement.textContent = monthYearString;
+
+    let datesHTML = '';
+
+    // Handle previous month's days
+    for (let i = firstDayIndex ; i >= 0; i--) {
+        const prevDate = new Date(currentYear, currentMonth , 0 - i);
+        datesHTML += `<div class="date blank">${prevDate.getDate()}</div>`;
+    }
+
+    // Handle current month's days
+    for (let i = 1; i <= totalDays; i++) {
+        const date = new Date(currentYear, currentMonth, i);
+        const activeClass = date.toDateString() === new Date().
+        toDateString() ? 'active' : '';
+        datesHTML += `<div class="date ${activeClass}">${i}</div>`;
+    }
+
+    
+    /*for (let i = 1; i <= 7 - lastDayIndex-firstDayIndex; i++) {
+        const nextDate = new Date(currentYear, currentMonth +
+             1, i);
+        datesHTML += `<div class="date inactive">${nextDate.
+            getDate()}</div>`;
+    }*/
+
+    datesElement.innerHTML = datesHTML;
+       
+}

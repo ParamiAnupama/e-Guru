@@ -1,0 +1,11 @@
+find a way to auto store the profile pics in host database
+
+create the er diagram
+
+should include  the following tables:
+-sessions
+-
+
+delete edit buttons and pages for subjects
+
+
