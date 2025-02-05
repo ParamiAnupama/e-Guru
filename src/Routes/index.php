@@ -1,8 +1,7 @@
 <?php
 
 use App\Controllers\HomeController;
-<<<<<<< Updated upstream
-=======
+
 use App\Controllers\SubjectController;
 use App\Controllers\AdvertisementController;
 
@@ -16,7 +15,7 @@ use App\Controllers\admin\AdminTutorGradingController;
 use App\Controllers\admin\AdminSettingsController;
 use App\Controllers\admin\AdminInboxController;
 
->>>>>>> Stashed changes
+
 use App\Router;
 
 use App\Controllers\StudentLoginController;
@@ -49,8 +48,7 @@ use App\Controllers\tutor\TutorLogoutController;
 $router = new Router();
 
 $router->get('/', HomeController::class, 'index');
-<<<<<<< Updated upstream
-=======
+
 $router->get('/subject', SubjectController::class, 'showSubjectPage');
 $router->get('/advertisement', AdvertisementController::class, 'showAdvertisementGalleryPage');
 $router->post('/upload-ad', AdvertisementController::class, 'uploadAdvertisement');
@@ -145,6 +143,6 @@ $router->post('/admin-dashboard/restoresubject', adminSubjectController::class, 
 
 $router->get('/admin-inbox', AdminInboxController::class, 'index'); // Show inbox
 $router->post('/admin-inbox/send', AdminInboxController::class, 'sendMessage'); // Handle sending a message
->>>>>>> Stashed changes
+
 
 $router->dispatch();
