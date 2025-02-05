@@ -30,16 +30,6 @@ class Router
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
 
-<<<<<<< Updated upstream
-        if (array_key_exists($uri, $this->routes[$method])) {
-            $controller = $this->routes[$method][$uri]['controller'];
-            $action = $this->routes[$method][$uri]['action'];
-
-            $controller = new $controller();
-            $controller->$action();
-        } else {
-            throw new \Exception("No route found for URI: $uri");
-=======
         foreach ($this->routes[$method] as $route) {
             // Convert dynamic routes to regex
             $pattern = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '([^/]+)', $route['route']);
@@ -59,7 +49,6 @@ class Router
                 );
                 return;
             }
->>>>>>> Stashed changes
         }
 
         throw new \Exception("No route found for URI: $uri");
